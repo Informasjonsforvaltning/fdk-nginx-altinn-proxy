@@ -1,4 +1,4 @@
-name: Build and deploy to staging (digdir) when pull request is created
+name: Build and deploy to staging when pull request is created
 
 on:
   pull_request:
@@ -37,7 +37,7 @@ jobs:
             helm init --client-only
             helm repo add fdk https://informasjonsforvaltning.github.io/helm-chart/
             helm fetch --untar --untardir ./helm fdk/fdk-nginx-altinn-proxy
-            helm template --set DOCKER_IMAGE_NAME="eu.gcr.io/digdir-fdk-infra/fdk-nginx-altinn-proxy:$GITHUB_SHA" -f ./helm/fdk-nginx-altinn-proxy/values/staging-digdir.yaml ./helm/fdk-nginx-altinn-proxy/ > ./kubectlapply.yaml
+            helm template --set DOCKER_IMAGE_NAME="eu.gcr.io/digdir-fdk-infra/fdk-nginx-altinn-proxy:$GITHUB_SHA" -f ./helm/fdk-nginx-altinn-proxy/values/staging.yaml ./helm/fdk-nginx-altinn-proxy/ > ./kubectlapply.yaml
             cat ./kubectlapply.yaml
             chmod o+w ./kubectlapply.yaml
             cat kubectlapply.yaml
@@ -62,4 +62,4 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         uses: pullreminders/slack-action@master
         with:
-          args: '{\"channel\":\"C7NTH118T\",\"text\":\"Application: fdk-ngnix-altinn-proxy deployed to digdir-staging\"}'
+          args: '{\"channel\":\"C7NTH118T\",\"text\":\"Application: fdk-ngnix-altinn-proxy deployed to staging\"}'
