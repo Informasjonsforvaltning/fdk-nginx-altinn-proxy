@@ -21,6 +21,10 @@ http {
 
             proxy_set_header ApiKey      ${ALTINN_API_KEY};
             proxy_set_header Accept      application/json;
+
+            proxy_http_version           1.1;
+            proxy_set_header Connection  "";
+
             access_log off;
             error_log /dev/null;
         }
