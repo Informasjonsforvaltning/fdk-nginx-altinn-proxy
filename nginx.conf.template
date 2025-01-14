@@ -11,6 +11,10 @@ http {
         server_name default_server;
 
         location /api/serviceowner {
+            if ($http_x_api_key != ${API_KEY}) {
+                return 403;
+            }
+
             proxy_pass                    ${ALTINN_HOST};
             proxy_ssl_certificate         /etc/nginx/client.crt.pem;
             proxy_ssl_certificate_key     /etc/nginx/client.key.pem;
