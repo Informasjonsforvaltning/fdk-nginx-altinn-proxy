@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> This repository is archived. fdk-nginx-altinn-proxy has been decommissioned
+> and is no longer deployed.
+
 The goal of the proxy is provide common access point for using Altinn service. 
 
 NB! The proxy makes the protected service available to entire network. As of latest security practice, local network cannot be assumed safe, and zero trust (perimeterless) policy needs to be applied. Potential solutions could be service mesh (e.g. istio), mutual tls or oidc.
